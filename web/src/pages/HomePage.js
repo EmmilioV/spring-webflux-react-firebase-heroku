@@ -11,7 +11,12 @@ const HomePage = ({children}) => (
     <Link to="/questions" className="button">
       View Questions
     </Link>
-  
+    <footer>
+      <p>
+        This is the homepage of question and answer page
+        this is the main page.
+      </p>
+      </footer>
   </section>
 )
 export default HomePage
