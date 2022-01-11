@@ -30,6 +30,7 @@ public class MapperUtils {
             question.setCategory(updateQuestion.getCategory());
             question.setQuestion(updateQuestion.getQuestion());
             question.setUserId(updateQuestion.getUserId());
+            question.setUserEmail(updateQuestion.getUserEmail());
             question.setType(updateQuestion.getType());
             return question;
         };
@@ -39,6 +40,7 @@ public class MapperUtils {
         return entity -> new QuestionDTO(
                 entity.getId(),
                 entity.getUserId(),
+                entity.getUserEmail(),
                 entity.getQuestion(),
                 entity.getType(),
                 entity.getCategory()

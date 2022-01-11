@@ -12,6 +12,8 @@ public class QuestionDTO {
     @NotBlank
     private String userId;
     @NotBlank
+    private String userEmail;
+    @NotBlank
     private String question;
     @NotBlank
     private String type;
@@ -24,16 +26,18 @@ public class QuestionDTO {
 
     }
 
-    public QuestionDTO(String userId, String question, String type, String category) {
+    public QuestionDTO(String userId, String userEmail, String question, String type, String category) {
         this.userId = userId;
+        this.userEmail = userEmail;
         this.question = question;
         this.type = type;
         this.category = category;
     }
 
-    public QuestionDTO(String id, String userId, String question, String type, String category) {
+    public QuestionDTO(String id, String userId, String userEmail, String question, String type, String category) {
         this.id = id;
         this.userId = userId;
+        this.userEmail = userEmail;
         this.question = question;
         this.type = type;
         this.category = category;
@@ -88,14 +92,24 @@ public class QuestionDTO {
         this.category = category;
     }
 
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
     @Override
     public String toString() {
         return "QuestionDTO{" +
                 "id='" + id + '\'' +
                 ", userId='" + userId + '\'' +
+                ", email='" + userEmail + '\'' +
                 ", question='" + question + '\'' +
                 ", type='" + type + '\'' +
                 ", category='" + category + '\'' +
+                ", answers=" + answers +
                 '}';
     }
 

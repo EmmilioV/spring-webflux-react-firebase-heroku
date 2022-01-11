@@ -9,9 +9,13 @@ public class Question {
     @Id
     private String id;
     private String userId;
+    private String userEmail;
     private String question;
     private String type;
     private String category;
+
+    public Question() {
+    }
 
 
     public String getId() {
@@ -52,5 +56,13 @@ public class Question {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 }
