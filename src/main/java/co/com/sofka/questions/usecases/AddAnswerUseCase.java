@@ -15,18 +15,26 @@ public class AddAnswerUseCase implements SaveAnswer {
     private final AnswerRepository answerRepository;
     private final MapperUtils mapperUtils;
     private final GetUseCase getUseCase;
+    private final SendEmailUseCase sendEmailUseCase;
 
-    public AddAnswerUseCase(MapperUtils mapperUtils, GetUseCase getUseCase, AnswerRepository answerRepository) {
+    public AddAnswerUseCase(MapperUtils mapperUtils, GetUseCase getUseCase, AnswerRepository answerRepository, SendEmailUseCase sendEmailUseCase) {
         this.answerRepository = answerRepository;
         this.getUseCase = getUseCase;
         this.mapperUtils = mapperUtils;
+        this.sendEmailUseCase = sendEmailUseCase;
     }
 
     public Mono<QuestionDTO> apply(AnswerDTO answerDTO) {
         Objects.requireNonNull(answerDTO.getQuestionId(), "Id of the answer is required");
-        return getUseCase.apply(answerDTO.getQuestionId()).flatMap(question ->
+        return getUseCase.apply(answerDTO.getQuestionId())
+                .flatMap(question ->
                 answerRepository.save(mapperUtils.mapperToAnswer().apply(answerDTO))
                         .map(answer -> {
+                            sendEmailUseCase.sendMail(
+                                    question.getUserEmail(),
+                                    "New answer to your question " + question.getQuestion(),
+                                    "You have an answer: " + answer.getAnswer()
+                            );
                             question.getAnswers().add(answerDTO);
                             return question;
                         })

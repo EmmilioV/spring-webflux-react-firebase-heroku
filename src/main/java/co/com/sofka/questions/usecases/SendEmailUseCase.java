@@ -12,8 +12,8 @@ public class SendEmailUseCase {
 
     @Autowired
     private JavaMailSender javaMailSender;
-
-    private final String FROM = "emmilio0207@gmail.com";
+//
+//    private final String FROM = "emmilio0207@gmail.com";
 
     public SendEmailUseCase() {
     }
@@ -21,9 +21,9 @@ public class SendEmailUseCase {
     public Mono<String> sendMail(String to, String subject, String body){
 
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-
-        simpleMailMessage.setFrom(FROM);
-        System.out.println(to);
+//
+//        simpleMailMessage.setFrom(FROM);
+//        System.out.println(to);
         simpleMailMessage.setTo(to);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(body);
