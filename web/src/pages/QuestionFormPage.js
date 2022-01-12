@@ -3,14 +3,19 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { postQuestion } from '../actions/questionActions'
 import { connect } from 'react-redux'
+import 'react-quill/dist/quill.snow.css';
+import { useState} from "react";
+import TextEditor from "../components/TextArea";
 
 const FormPage = ({ dispatch, loading, redirect, userId, userEmail }) => {
     const { register, handleSubmit } = useForm();
     const history = useHistory();
+    const [ body, setBody ] = useState("");
 
     const onSubmit = data => {
         data.userId = userId;
         data.userEmail = userEmail;
+        data.question = body;
         dispatch(postQuestion(data));
     };
 
@@ -49,7 +54,7 @@ const FormPage = ({ dispatch, loading, redirect, userId, userEmail }) => {
 
                 <div>
                     <label for="question">Question</label>
-                    <textarea id="question" {...register("question", { required: true, maxLength: 300 })} />
+                    <TextEditor body={body} setBody={setBody}/>
                 </div>
                 <button type="submit" className="button" disabled={loading} >{
                     loading ? "Saving ...." : "Save"
