@@ -11,6 +11,6 @@ export const Answer = ({ answer, onDelete, userId, questionId }) => (
     <ReactQuill value={answer.answer}  
                     modules={modules}   
                     readOnly={true}/>
-    <button className='deleteAnswer' onClick={()=>onDelete(answer.id, answer.userId, userId, questionId)}>Delete</button>
+    {answer.userId === userId && <button className='deleteAnswer' onClick={()=>onDelete(answer.id, questionId)}>Delete</button>}
   </aside>
 )

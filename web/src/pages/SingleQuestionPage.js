@@ -28,9 +28,7 @@ const SingleQuestionPage = ({
     return <Question question={question} />
   }
 
-  const onDelete = (answerId, userAnswerId, userId, questionId) => {
-    console.log(answerId, userAnswerId, userId, questionId);
-    if(userAnswerId === userId){
+  const onDelete = (answerId, questionId) => {
       swal({
         title: "Delete",
         text: "are you sure that you want to delete this answer?",
@@ -41,13 +39,12 @@ const SingleQuestionPage = ({
             dispatch(deleteAnswer(answerId, questionId));
             swal({text: "Answer deleted successfully",
                 icon: "success"
-            })
+            });
+            setTimeout(() => {
+              window.location.href = window.location.href;
+            }, 4000)
         }
       })
-    }
-    else{
-      swal("You can't delete this, you are not the owner of this answer")
-    }
   }
 
   const renderAnswers = () => {
