@@ -115,4 +115,14 @@ public class QuestionRouter {
                         .body(BodyInserters.fromPublisher(deleteUseCase.apply(request.pathVariable("id")), Void.class))
         );
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> removeFavoriteQuestion(RemoveFavoriteQuestionUseCase removeFavoriteQuestionUseCase) {
+        return route(
+                DELETE("/removeFavoriteQuestion/{questionId}/{userId}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.accepted()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(removeFavoriteQuestionUseCase.apply(request.pathVariable("questionId"), request.pathVariable("userId")), Void.class))
+        );
+    }
 }

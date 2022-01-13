@@ -5,7 +5,7 @@ import logo from '../asserts/logo.png'
 export const PublicNavbar = () => (
   <nav>
     <section>
-      <img class="logo" src={logo}></img>
+      <img className="logo" src={logo}></img>
       <Link to="/">Home</Link>
       <Link to="/questions">Questions</Link>
     </section>
@@ -15,7 +15,7 @@ export const PublicNavbar = () => (
 export const PrivateNavbar = () => (
   <nav>
     <section>
-    <img class="logo" src={logo}></img>
+    <img className="logo" src={logo}></img>
       <Link to="/">Home</Link>
       <Link to="/questions">Questions</Link>
       <Link to="/new">New</Link>

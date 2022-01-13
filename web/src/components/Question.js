@@ -7,7 +7,7 @@ const modules = {
   toolbar: false
 };
 
-export const Question = ({ question, excerpt, onDelete }) => (
+export const Question = ({ question, excerpt, onDelete, removeOfFavorite, userId }) => (
   <article className={excerpt ? 'question-excerpt' : 'question'}>
     <h2><ReactQuill value= {question.question}  
                     modules={modules}   
@@ -18,10 +18,15 @@ export const Question = ({ question, excerpt, onDelete }) => (
     {onDelete && (
       <button className="button right" onClick={() => onDelete(question.id)}>DELETE</button>
     )}
+    {removeOfFavorite && (
+      <button className="button right" onClick={() => removeOfFavorite(question.id, userId)}>remove from favorites</button>
+    )}
     {excerpt && (
       <Link to={`/question/${question.id}`} className="button">
         View Question
       </Link>
     )}
+
+    {console.log(userId, question.id)}
   </article>
 )

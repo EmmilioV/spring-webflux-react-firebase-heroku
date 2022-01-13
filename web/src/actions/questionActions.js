@@ -103,8 +103,27 @@ export function postQuestionToFavorite(favorite) {
                     body: JSON.stringify(favorite)
                 }
             )
-            const id = await response.text()
-            dispatch(success({redirect: `/question/${id}`}));
+            dispatch(success({redirect: `/favorites`}));
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
+export function removeFavoriteQuestion(questionId, userId) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            await fetch(`${URL_BASE}/removeFavoriteQuestion/${questionId}/${userId}`,
+                {
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            dispatch(success({redirect: `/favorites`}));
         } catch (error) {
             dispatch(failure())
         }

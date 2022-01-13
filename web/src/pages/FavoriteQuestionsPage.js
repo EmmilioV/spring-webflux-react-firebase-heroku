@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchFavoriteQuestions, deleteQuestion } from '../actions/questionActions'
+import { fetchFavoriteQuestions, removeFavoriteQuestion } from '../actions/questionActions'
 import { Question } from '../components/Question'
 
 const FavoriteQuestionsPage = ({ dispatch, loading, questions, hasErrors, redirect, userId }) => {
@@ -15,8 +15,8 @@ const FavoriteQuestionsPage = ({ dispatch, loading, questions, hasErrors, redire
         }
     }, [redirect, dispatch, userId]);
 
-    const onDelete = (id) => {
-        dispatch(deleteQuestion(id))
+    const removeOfFavorite = (id, userId) => {
+        dispatch(removeFavoriteQuestion(id, userId))
     }
 
 
@@ -27,7 +27,8 @@ const FavoriteQuestionsPage = ({ dispatch, loading, questions, hasErrors, redire
         return questions.map(question => <Question
             key={question.id}
             question={question}
-            excerpt onDelete={onDelete} />)
+            excerpt removeOfFavorite={removeOfFavorite}
+            userId = {userId}/>)
     }
 
     return (
