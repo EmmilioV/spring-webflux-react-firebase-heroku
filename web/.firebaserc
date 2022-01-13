@@ -1,7 +1,0 @@
-{
-  "projects": {
-    "default": "hospedaje-qandaproject",
-    "question-app": "hospedaje-qandaproject"
-  },
-  "targets": {}
-}
