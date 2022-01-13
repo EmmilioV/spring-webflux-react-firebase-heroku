@@ -21,12 +21,13 @@ import FavoriteQuestions from './pages/FavoriteQuestionsPage'
 import { useAuthState } from "react-firebase-hooks/auth";
 
 firebase.initializeApp({
-  apiKey: "AIzaSyCTySyvuIDPg7RWF6ceuuwC2t3BEiAK38o",
-  authDomain: "question-app-demo.firebaseapp.com",
-  projectId: "question-app-demo",
-  storageBucket: "question-app-demo.appspot.com",
-  messagingSenderId: "1038673531562",
-  appId: "1:1038673531562:web:da90421f639a3115dcf6d3"
+  apiKey: "AIzaSyBdOJrzf-Y5lbU4qHUtsGOszvA1tfSJVEo",
+  authDomain: "hospedaje-qandaproject.firebaseapp.com",
+  projectId: "hospedaje-qandaproject",
+  storageBucket: "hospedaje-qandaproject.appspot.com",
+  messagingSenderId: "354830165485",
+  appId: "1:354830165485:web:679657287ea2f978c073e4",
+  measurementId: "G-VHJZB1PG8R"
 });
 
 const auth = firebase.auth();
