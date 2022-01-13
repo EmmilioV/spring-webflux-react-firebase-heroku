@@ -10,6 +10,6 @@ export const Answer = ({ answer }) => (
   <aside className="answer">
     <ReactQuill value={answer.answer}  
                     modules={modules}   
-                    readOnly='true'/>
+                    readOnly={true}/>
   </aside>
 )
