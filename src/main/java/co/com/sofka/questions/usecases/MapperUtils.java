@@ -1,8 +1,10 @@
 package co.com.sofka.questions.usecases;
 
 import co.com.sofka.questions.collections.Answer;
+import co.com.sofka.questions.collections.Favorite;
 import co.com.sofka.questions.collections.Question;
 import co.com.sofka.questions.model.AnswerDTO;
+import co.com.sofka.questions.model.FavoriteDTO;
 import co.com.sofka.questions.model.QuestionDTO;
 import org.springframework.stereotype.Component;
 
@@ -36,6 +38,16 @@ public class MapperUtils {
         };
     }
 
+    public Function<FavoriteDTO, Favorite> mapperToFavorite(String id){
+        return updateFavorite -> {
+            var favorite = new Favorite();
+            favorite.setId(id);
+            favorite.setUserId(updateFavorite.getUserId());
+            favorite.setQuestionId(updateFavorite.getQuestionId());
+            return favorite;
+        };
+    }
+
     public Function<Question, QuestionDTO> mapEntityToQuestion() {
         return entity -> new QuestionDTO(
                 entity.getId(),
@@ -52,6 +64,14 @@ public class MapperUtils {
                 entity.getId(),
                 entity.getUserId(),
                 entity.getAnswer()
+        );
+    }
+
+    public Function<Favorite, FavoriteDTO> mapEntityToFavorite() {
+        return entity -> new FavoriteDTO(
+                entity.getId(),
+                entity.getUserId(),
+                entity.getQuestionId()
         );
     }
 }

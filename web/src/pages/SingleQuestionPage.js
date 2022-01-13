@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchQuestion } from '../actions/questionActions'
+import { fetchQuestion, postQuestionToFavorite } from '../actions/questionActions'
 
 import { Question } from '../components/Question'
 import { Answer } from '../components/Answer'
@@ -33,8 +33,14 @@ const SingleQuestionPage = ({
     )) : <p>Empty answer!</p>;
   }
 
+  const addToFavorite = () => {
+    let data = {userId : userId, questionId : question.id};
+    dispatch(postQuestionToFavorite(data))
+  }
+
   return (
     <section>
+      <button className='addToFavorite' onClick={addToFavorite}>add to Favorite</button>
       {renderQuestion()}
       {userId && <Link to={"/answer/" + id} className="button right">
         Reply

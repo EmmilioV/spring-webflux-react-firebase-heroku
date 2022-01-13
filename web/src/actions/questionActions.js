@@ -41,6 +41,19 @@ export function fetchOwnerQuestions(userId) {
     }
 }
 
+export function fetchFavoriteQuestions(userId) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(`${URL_BASE}/getFavoriteQuestions/${userId}`)
+            const data = await response.json()
+            dispatch(success({ questions: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
 export function fetchQuestion(id) {
     return async dispatch => {
         dispatch(loading())
@@ -66,6 +79,28 @@ export function postQuestion(question) {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(question)
+                }
+            )
+            const id = await response.text()
+            dispatch(success({redirect: `/question/${id}`}));
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
+export function postQuestionToFavorite(favorite) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(`${URL_BASE}/addToFavorite`,
+                {
+                    method: 'POST',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(favorite)
                 }
             )
             const id = await response.text()
