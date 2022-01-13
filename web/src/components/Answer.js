@@ -6,10 +6,11 @@ const modules = {
   toolbar: false
 };
 
-export const Answer = ({ answer }) => (
+export const Answer = ({ answer, onDelete, userId, questionId }) => (
   <aside className="answer">
     <ReactQuill value={answer.answer}  
                     modules={modules}   
                     readOnly={true}/>
+    <button className='deleteAnswer' onClick={()=>onDelete(answer.id, answer.userId, userId, questionId)}>Delete</button>
   </aside>
 )

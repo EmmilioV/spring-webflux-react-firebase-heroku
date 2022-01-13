@@ -27,6 +27,5 @@ export const Question = ({ question, excerpt, onDelete, removeOfFavorite, userId
       </Link>
     )}
 
-    {console.log(userId, question.id)}
   </article>
 )

@@ -150,6 +150,26 @@ export function deleteQuestion(id) {
     }
 }
 
+export function deleteAnswer(answerId, questionId) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            await fetch(`${URL_BASE}/deleteAnswer/${answerId}`,
+                {
+                    method: 'DELETE',
+                    mode: 'cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            dispatch(success({redirect: `/question/${questionId}`}));
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
 export function postAnswer(answer) {
     return async dispatch => {
         dispatch(loading())

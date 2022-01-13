@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
+import swal from 'sweetalert'
 
-import { fetchQuestion, postQuestionToFavorite } from '../actions/questionActions'
+import { fetchQuestion, postQuestionToFavorite, deleteAnswer } from '../actions/questionActions'
 
 import { Question } from '../components/Question'
 import { Answer } from '../components/Answer'
@@ -27,9 +28,31 @@ const SingleQuestionPage = ({
     return <Question question={question} />
   }
 
+  const onDelete = (answerId, userAnswerId, userId, questionId) => {
+    console.log(answerId, userAnswerId, userId, questionId);
+    if(userAnswerId === userId){
+      swal({
+        title: "Delete",
+        text: "are you sure that you want to delete this answer?",
+        icon: "warning",
+        buttons: ["No", "Si"]
+      }).then(response => {
+        if(response){
+            dispatch(deleteAnswer(answerId, questionId));
+            swal({text: "Answer deleted successfully",
+                icon: "success"
+            })
+        }
+      })
+    }
+    else{
+      swal("You can't delete this, you are not the owner of this answer")
+    }
+  }
+
   const renderAnswers = () => {
     return (question.answers && question.answers.length) ? question.answers.map(answer => (
-      <Answer key={answer.id} answer={answer} />
+      <Answer key={answer.id} answer={answer} onDelete={onDelete} userId={userId} questionId={question.id}/>
     )) : <p>Empty answer!</p>;
   }
 
