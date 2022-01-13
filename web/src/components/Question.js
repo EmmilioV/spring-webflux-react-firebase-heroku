@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import TextEditor from './TextArea';
 
 const modules = {
   toolbar: false
@@ -9,9 +10,9 @@ const modules = {
 
 export const Question = ({ question, excerpt, onDelete, removeOfFavorite, userId }) => (
   <article className={excerpt ? 'question-excerpt' : 'question'}>
-    <h2><ReactQuill value= {question.question}  
+    <h2><ReactQuill value= {question.question || ''} 
                     modules={modules}   
-                    readOnly={true}/></h2>
+                    readOnly={true}/></h2> 
     
     <p>{question.category}  - <small>{question.type}</small></p>
   
